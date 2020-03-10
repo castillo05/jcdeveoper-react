@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 // core components
+// Axios
+import Axios from "axios";
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -42,6 +44,9 @@ import Typography from '@material-ui/core/Typography';
 
 import styles from "assets/jss/material-kit-react/views/components.js";
 
+// Componentes Prsonalizados
+import CardPost from 'components/CardPost/CardPost.js';
+
 const useStyles = makeStyles(theme=> ({
   root: {
     flexGrow: 1,
@@ -60,6 +65,8 @@ const useStyles = makeStyles(theme=> ({
 const data=[0,1,2,3];
 
 const useStyles2=makeStyles(styles);
+
+
 
 export default function Components(props) {
   const classes = useStyles2();
@@ -95,44 +102,7 @@ export default function Components(props) {
       </Parallax>
      
       <div className={classNames(classes.main, classes.mainRaised)}>
-      <div className={classes.root}>
-      <Grid container spacing={3}>
-        {data.map(d => (
-          <Grid item xs={12} sm={6} lg={3}>
-                    {/* Card */}
-                            <Card className={classes2.root}>
-                              <CardActionArea>
-                                <CardMedia
-                                  className={classes2.media}
-                                  image=""
-                                  title="Contemplative Reptile"
-                                />
-                                <CardContent>
-                                  <Typography gutterBottom variant="h5" component="h2">
-                                    Lizard
-                                  </Typography>
-                                  <Typography variant="body2" color="textSecondary" component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
-                                  </Typography>
-                                </CardContent>
-                              </CardActionArea>
-                              <CardActions>
-                                <Button size="small" color="primary">
-                                  Share
-                                </Button>
-                                <Button size="small" color="primary">
-                                  Learn More
-                                </Button>
-                              </CardActions>
-                      </Card>
-                      {/* End Card */}
-                  </Grid>
-        ))}
-        
-       
-      </Grid>
-    </div>
+      <CardPost/>
         {/* <SectionBasics />
         <SectionNavbars />
         <SectionTabs />
