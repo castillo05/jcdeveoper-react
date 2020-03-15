@@ -58,7 +58,7 @@ export default function LandingPage(props) {
  
   const [post,setPost]=useState({});
   // Hook para manejar la url de la api
-  const [apiUrl, setApiUrl] = useState(`http://localhost:9105/api/post/${props.match.params.slug}`);
+  const [apiUrl, setApiUrl] = useState(`https://jcdeveloperteam.herokuapp.com/api/post/${props.match.params.slug}`);
 
   const imageClasses = classNames(
     classes.imgRaised,

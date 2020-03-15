@@ -24,6 +24,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import {Link} from 'react-router-dom';
 
 import styles from "assets/jss/material-kit-react/views/components.js";
+import Quote from "components/Typography/Quote.js";
 
 // Imagen de fondo de post
 import bg from 'assets/img/bg.png'
@@ -61,7 +62,7 @@ function CardPost(props){
     // Hook para tomar el numero total de paginas
     const [pages,setPages]=useState();
     // Hook para manejar la url de la api
-    const [apiUrl, setApiUrl] = useState('http://localhost:9105/api/posts/1');
+    const [apiUrl, setApiUrl] = useState('https://jcdeveloperteam.herokuapp.com/api/posts/1');
 
     // Usado para gargar despues del render el lugar de componentDidmount
     useEffect(()=>{
@@ -79,7 +80,7 @@ function CardPost(props){
 
     const onChangePage=(e,page)=>{
       setPage(page)
-      setApiUrl('http://localhost:9105/api/posts/'+page);
+      setApiUrl('https://jcdeveloperteam.herokuapp.com/api/posts/'+page);
     }
 
     
@@ -121,16 +122,16 @@ function CardPost(props){
                                               <Typography gutterBottom variant="h5" component="h2">
                                                 {d.title}
                                               </Typography>
-                                              <Typography variant="body2" color="textSecondary" component="p">
-                                                {d.resume}
-                                              </Typography>
+                                              <Quote text={d.resume} author="Jorge Castillo">
+                                                
+                                              </Quote>
                                             </CardContent>
                                           </CardActionArea>
                                           <CardActions>
-                                            <Button color="primary">
+                                            <Button color="primary" simple>
                                               Share
                                             </Button>
-                                            <Button >
+                                            <Button color="info" simple>
                                               <Link to={`/blog/${d.slug}`}>Leer Más</Link>
                                             </Button>
                                           </CardActions>
