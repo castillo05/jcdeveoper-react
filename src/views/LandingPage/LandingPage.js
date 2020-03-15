@@ -1,4 +1,4 @@
-import React from "react";
+import React,{Component,useEffect,useState} from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -21,14 +21,64 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
+// Axios
+import Axios from "axios";
+// Avatar
+import Avatar from '@material-ui/core/Avatar';
+import avatar from "assets/img/faces/mi.jpg";
+
 
 const dashboardRoutes = [];
 
-const useStyles = makeStyles(styles);
+const useStyles2 = makeStyles(styles);
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+}));
 
 export default function LandingPage(props) {
-  const classes = useStyles();
-  const { ...rest } = props;
+  const classes = useStyles2();
+ 
+  const { slug2,...rest } = props;
+  
+  const {slug}=props.match.params.slug;
+  console.log(slug2)
+ 
+  const [post,setPost]=useState({});
+  // Hook para manejar la url de la api
+  const [apiUrl, setApiUrl] = useState(`http://localhost:9105/api/post/${props.match.params.slug}`);
+
+  const imageClasses = classNames(
+    classes.imgRaised,
+    classes.imgRoundedCircle,
+    classes.imgFluid
+  );
+
+  useEffect(()=>{
+    
+    const getPost= async()=>{
+      const result= await Axios(apiUrl,{
+
+      });
+      
+      setPost(result.data.publicacion)
+    }
+
+    getPost()
+  },[apiUrl])
+
   return (
     <div>
       <Header
@@ -43,19 +93,16 @@ export default function LandingPage(props) {
         }}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/landing-bg.jpg")}>
+      <Parallax filter image={post.image}>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Your Story Starts With Us.</h1>
-              <h4>
-                Every landing page needs a small description after the big bold
-                title, that{"'"}s why we added this text here. Add here all the
-                information that can make you or your product create the first
-                impression.
+            <GridItem xs={12} sm={12} md={12}>
+      <h1 className={classes.title}>{post.title}</h1>
+              <h4 className={classes.title}>
+                {post.resume}
               </h4>
               <br />
-              <Button
+              {/* <Button
                 color="danger"
                 size="lg"
                 href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
@@ -64,16 +111,17 @@ export default function LandingPage(props) {
               >
                 <i className="fas fa-play" />
                 Watch video
-              </Button>
+              </Button> */}
             </GridItem>
+            <Avatar alt="Remy Sharp" src={avatar} className={classes.large} />
           </GridContainer>
         </div>
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <ProductSection />
-          <TeamSection />
-          <WorkSection />
+          <ProductSection description={post.description} avatar={avatar}/>
+          {/* <TeamSection />
+          <WorkSection /> */}
         </div>
       </div>
       <Footer />

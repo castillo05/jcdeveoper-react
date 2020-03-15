@@ -20,8 +20,14 @@ import Button from "components/CustomButtons/Button.js";
 import LinearProgress from '@material-ui/core/LinearProgress';
 // Pagination
 import Pagination from '@material-ui/lab/Pagination';
+// Link
+import {Link} from 'react-router-dom';
 
 import styles from "assets/jss/material-kit-react/views/components.js";
+
+// Imagen de fondo de post
+import bg from 'assets/img/bg.png'
+  
 const useStyles = makeStyles(theme=> ({
     root: {
       '& > *': {
@@ -41,8 +47,11 @@ const useStyles = makeStyles(theme=> ({
     },
   }));
   const useStyles2=makeStyles(styles);
+
   
-function CardPost(){
+function CardPost(props){
+  const { ...rest } = props;
+  console.log(props)
   // Hook para el estado de posts
     const [posts,setPosts] = useState([]);
     // Hook para el estado de carga
@@ -78,64 +87,61 @@ function CardPost(){
         const classes = useStyles2();
         return(
             <div>
-               
-                 <div className={classes.root}>
+                <div className={classes.root}>
                   
-      <Grid container spacing={3}>
-      <Pagination count={pages} color='primary' page={page} onChange={onChangePage}/>
-      <Grid item xs={12} sm={12} lg={12}>
-             {
-                     loading && (
-                      <div>
-                          <LinearProgress/>
-                          <LinearProgress color="secondary" />
-                          Loading...
-                      </div>
-                     
-                     )
-                   }
-          </Grid>
-      {/* <pre>{JSON.stringify(response, null, 2)}</pre> */}
-      
-        {posts.map(d => (
-         
-          <Grid item xs={12} sm={6} lg={3}>
+                  <Grid container spacing={3}>
+                  <Pagination count={pages} color='primary' page={page} onChange={onChangePage}/>
+                  <Grid item xs={12} sm={12} lg={12}>
+                        {
+                                loading && (
+                                  <div>
+                                      <LinearProgress/>
+                                      <LinearProgress color="secondary" />
+                                      Loading...
+                                  </div>
+                                
+                                )
+                              }
+                      </Grid>
+                  {/* <pre>{JSON.stringify(response, null, 2)}</pre> */}
                   
-                    {/* Card */}
-                            <Card className={classes2.root}>
-                              <CardActionArea>
-                                <CardMedia
-                                  className={classes2.media}
-                                  image={d.image}
-                                  title="Contemplative Reptile"
-                                />
-                                <CardContent>
-                                  <Typography gutterBottom variant="h5" component="h2">
-                                    {d.title}
-                                  </Typography>
-                                  <Typography variant="body2" color="textSecondary" component="p">
-                                    {d.resume}
-                                  </Typography>
-                                </CardContent>
-                              </CardActionArea>
-                              <CardActions>
-                                <Button size="small" color="primary">
-                                  Share
-                                </Button>
-                                <Button size="small" color="primary">
-                                  Learn More
-                                </Button>
-                              </CardActions>
-                      </Card>
-                      {/* End Card */}
-                      
+                    {posts.map((d,index) => (
+                    
+                      <Grid key={index} item xs={12} sm={6} lg={3}>
+                              
+                                {/* Card */}
+                                        <Card className={classes2.root}>
+                                          <CardActionArea>
+                                            <CardMedia
+                                              className={classes2.media}
+                                              image={d.image ? d.image : bg}
+                                              title="Contemplative Reptile"
+                                            />
+                                            <CardContent>
+                                              <Typography gutterBottom variant="h5" component="h2">
+                                                {d.title}
+                                              </Typography>
+                                              <Typography variant="body2" color="textSecondary" component="p">
+                                                {d.resume}
+                                              </Typography>
+                                            </CardContent>
+                                          </CardActionArea>
+                                          <CardActions>
+                                            <Button color="primary">
+                                              Share
+                                            </Button>
+                                            <Button >
+                                              <Link to={`/blog/${d.slug}`}>Leer Más</Link>
+                                            </Button>
+                                          </CardActions>
+                                  </Card>
+                                  {/* End Card */}
+                                  
+                              </Grid>
+                    ))}
                   </Grid>
-        ))}
-        
-        
-      </Grid>
-      <Pagination count={pages} color='primary' page={page} onChange={onChangePage}/>
-    </div>
+                <Pagination count={pages} color='primary' page={page} onChange={onChangePage}/>
+              </div>
             </div>
         )
    

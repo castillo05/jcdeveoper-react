@@ -3,7 +3,7 @@ import { title } from "assets/jss/material-kit-react.js";
 const productStyle = {
   section: {
     padding: "70px 0",
-    textAlign: "center"
+    textAlign: "justify"
   },
   title: {
     ...title,
@@ -12,8 +12,11 @@ const productStyle = {
     minHeight: "32px",
     textDecoration: "none"
   },
+  resume:{
+    color:"#fff"
+  },
   description: {
-    color: "#999"
+    color: "#000"
   }
 };
 

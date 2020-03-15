@@ -62,8 +62,6 @@ const useStyles = makeStyles(theme=> ({
   },
 }));
 
-const data=[0,1,2,3];
-
 const useStyles2=makeStyles(styles);
 
 

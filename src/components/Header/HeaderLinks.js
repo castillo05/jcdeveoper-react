@@ -30,7 +30,7 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       {/* Link Blog */}
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <Button
           href="https://jcdeveloperteam.herokuapp.com/blogs"
           color="transparent"
@@ -39,7 +39,7 @@ export default function HeaderLinks(props) {
         >
           <LibraryBooksIcon className={classes.icons} /> Blog
         </Button>
-      </ListItem>
+      </ListItem> */}
       {/* End */}
        {/* Link Sobre Mi */}
        <ListItem className={classes.listItem}>
@@ -111,7 +111,7 @@ export default function HeaderLinks(props) {
           classes={{ tooltip: classes.tooltip }}
         >
           <Button
-            href="https://twitter.com/CreativeTim?ref=creativetim"
+            href=""
             target="_blank"
             color="transparent"
             className={classes.navLink}
@@ -129,7 +129,7 @@ export default function HeaderLinks(props) {
         >
           <Button
             color="transparent"
-            href="https://www.facebook.com/CreativeTim?ref=creativetim"
+            href=""
             target="_blank"
             className={classes.navLink}
           >
@@ -146,7 +146,7 @@ export default function HeaderLinks(props) {
         >
           <Button
             color="transparent"
-            href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+            href=""
             target="_blank"
             className={classes.navLink}
           >
