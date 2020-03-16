@@ -14,22 +14,27 @@ import InfoArea from "components/InfoArea/InfoArea.js";
 import parse from 'html-react-parser';
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+import Highlight from 'react-highlight'
 
 const useStyles = makeStyles(styles);
 
 export default function ProductSection(props) {
   const { description,avatar,...rest } = props;
   const html = description;
+  console.log(html)
   const classes = useStyles();
-
+  const codeString = '(num) => num + 1';
   return (
     <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={12}>
           {/* <h2 className={classes.title}>Let{"'"}s talk product</h2> */}
           <div className={classes.description}>
-          {html!==undefined && parse(html)}
-
+          
+          <Highlight innerHTML={true}>{html}</Highlight>
+          <Highlight language="javascript">
+            {`function foo() { return 'bar' }`}
+          </Highlight>
           </div>
         </GridItem>
       </GridContainer>
