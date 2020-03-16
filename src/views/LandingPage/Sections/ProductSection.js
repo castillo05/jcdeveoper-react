@@ -1,7 +1,8 @@
 import React,{Component,useEffect,useState} from 'react';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+// react components for routing our app without refresh
+import { Link } from "react-router-dom";
 // @material-ui/icons
 import Chat from "@material-ui/icons/Chat";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
@@ -16,6 +17,10 @@ import parse from 'html-react-parser';
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import Highlight from 'react-highlight'
 
+// Icon
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Button from "components/CustomButtons/Button.js";
+
 const useStyles = makeStyles(styles);
 
 export default function ProductSection(props) {
@@ -26,15 +31,16 @@ export default function ProductSection(props) {
   const codeString = '(num) => num + 1';
   return (
     <div className={classes.section}>
+      <Link to="/"><ArrowBackIcon fontSize="large" color="primary" className={classes.icons}/></Link> 
+      <hr></hr>    
       <GridContainer justify="center">
+          
         <GridItem xs={12} sm={12} md={12}>
           {/* <h2 className={classes.title}>Let{"'"}s talk product</h2> */}
           <div className={classes.description}>
           
           <Highlight innerHTML={true}>{html}</Highlight>
-          <Highlight language="javascript">
-            {`function foo() { return 'bar' }`}
-          </Highlight>
+         
           </div>
         </GridItem>
       </GridContainer>
