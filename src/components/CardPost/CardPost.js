@@ -28,6 +28,8 @@ import Quote from "components/Typography/Quote.js";
 
 // Imagen de fondo de post
 import bg from 'assets/img/bg.png'
+
+import Search from 'components/Search/Search.js';
   
 const useStyles = makeStyles(theme=> ({
     root: {
@@ -52,7 +54,7 @@ const useStyles = makeStyles(theme=> ({
   
 function CardPost(props){
   const { ...rest } = props;
-  console.log(props)
+ 
   // Hook para el estado de posts
     const [posts,setPosts] = useState([]);
     // Hook para el estado de carga
@@ -70,26 +72,40 @@ function CardPost(props){
         const result=await Axios(apiUrl,{
   
         });
-        console.log(result.data.posts)
+        
        setPosts(result.data.posts.docs);
        setPages(result.data.posts.pages)
        setLoading(false);
       }
     getData()
     },[apiUrl])
+   
 
     const onChangePage=(e,page)=>{
       setPage(page)
       setApiUrl('https://jcdeveloperteam.herokuapp.com/api/posts/'+page);
     }
 
-    
+    const handleSearch=async (data)=>{
+     
+      if(data!==''){
+            setApiUrl(`https://jcdeveloperteam.herokuapp.com/api/searchpost/${data}/1`)
+            const result=await Axios(apiUrl,{
+            });
+            setPosts(result.data.posts.docs);
+            setLoading(false);
+      }else{
+        setApiUrl('https://jcdeveloperteam.herokuapp.com/api/posts/1')
+      }
+    }
         const classes2=useStyles();
         const classes = useStyles2();
         return(
             <div>
                 <div className={classes.root}>
-                  
+                <Search handleInputChange={(data)=>handleSearch(data)}></Search>
+                
+                <br></br>
                   <Grid container spacing={3}>
                   <Pagination count={pages} color='primary' page={page} onChange={onChangePage}/>
                   <Grid item xs={12} sm={12} lg={12}>

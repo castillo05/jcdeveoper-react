@@ -46,7 +46,7 @@ import styles from "assets/jss/material-kit-react/views/components.js";
 
 // Componentes Prsonalizados
 import CardPost from 'components/CardPost/CardPost.js';
-import Search from 'components/Search/Search.js';
+
 const useStyles = makeStyles(theme=> ({
   root: {
     flexGrow: 1,
@@ -100,7 +100,7 @@ export default function Components(props) {
       </Parallax>
      
       <div className={classNames(classes.main, classes.mainRaised)}>
-      <Search></Search>
+     
       <CardPost/>
         {/* <SectionBasics />
         <SectionNavbars />

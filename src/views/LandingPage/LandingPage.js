@@ -49,6 +49,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function LandingPage(props) {
+ 
   const classes = useStyles2();
  
   const { slug2,...rest } = props;
